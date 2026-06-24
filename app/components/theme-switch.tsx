@@ -71,26 +71,26 @@ export const ThemeSwitch: React.FC = () => {
   };
 
   if (!mounted) {
-    return (
-      <FaCircleHalfStroke
-        className="h-[14px] w-[14px] text-[#1c1c1c]"
-        aria-hidden="true"
-      />
-    );
-  }
+  return (
+    <FaCircleHalfStroke
+      className="h-[18px] w-[18px]"
+      aria-hidden="true"
+    />
+  );
+}
 
   return (
-    <button
-      id="theme-toggle"
-      aria-label={`${currentTheme} mode`}
-      onClick={toggleTheme}
-      className="flex items-center justify-center transition-opacity duration-300 hover:opacity-90 cursor-pointer"
-    >
-      <FaCircleHalfStroke
-        className={`h-[14px] w-[14px] ${
-          currentTheme === "dark" ? "text-[#D4D4D4]" : "text-[#1c1c1c]"
-        }`}
-      />
-    </button>
-  );
+  <button
+    id="theme-toggle"
+    aria-label={`${currentTheme} mode`}
+    onClick={toggleTheme}
+    className="nav-button cursor-pointer"
+  >
+    <FaCircleHalfStroke
+      className={`h-[18px] w-[18px] ${
+        currentTheme === "dark" ? "text-[#5BC8E8]" : "text-[#123857]]"
+      }`}
+    />
+  </button>
+);
 };

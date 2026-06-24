@@ -1,0 +1,75 @@
+---
+title: "STUDY PLANNER WEB APPLICATION"
+publishedAt: "2026"
+summary: "Full-stack productivity application focused on API integration, frontend-backend communication, and user-centered design."
+tags: ["Full-Stack", "Next.js", "TypeScript", "PostgreSQL"]
+---
+
+## Overview
+A full-stack study planning application currently in active development. 
+This project is being built to deepen practical experience with full-stack 
+architecture, REST API design, database modeling, and deploying production 
+web applications. The goal is a tool that helps users organize study 
+sessions, track progress, and manage tasks across subjects.
+
+> **Status:** In development: Task management 
+> features are complete. User authentication, dashboard and analytics views are in progress.
+
+[View the GitHub Repository](https://github.com/matontim/studydesk)
+
+---
+
+## Tech Stack
+
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| Frontend | Next.js 15, TypeScript | UI and routing |
+| Styling | Tailwind CSS | Component styling |
+| Backend | Next.js API Routes | REST endpoints |
+| Database | PostgreSQL | Persistent storage |
+| ORM | Prisma | Database modeling |
+| Auth | NextAuth.js | User authentication |
+| Deployment | Vercel | Hosting and CI/CD |
+
+---
+
+## Architecture
+
+The application follows a monorepo structure with the Next.js frontend 
+and API routes colocated. The database layer uses Prisma ORM for 
+type-safe queries and schema migrations.
+
+---
+
+## Current Features
+
+  via NextAuth.js with JWT tokens
+- **Task management**: create, edit, delete, and complete study tasks
+- **Subject organization**: group tasks by subject with color coding
+- **Responsive layout**: mobile-first design with Tailwind CSS
+
+---
+
+## In Progress
+
+- **User authentication**: sign up, login, and session management 
+- **Dashboard analytics**: study time tracking and completion rate 
+  visualization using Recharts
+- **Calendar view**: weekly planner interface for scheduling sessions
+- **API rate limiting**: middleware for protecting endpoints
+
+---
+
+## Next Steps
+
+- Set up user authentication
+- Complete dashboard analytics view
+- Add end-to-end tests with Playwright
+- Deploy to Vercel with production PostgreSQL (Supabase)
+- Write a post-mortem once the project ships
+
+---
+
+## Tools
+Next.js, TypeScript, Tailwind CSS, PostgreSQL, Prisma, NextAuth.js, 
+Vercel, Git

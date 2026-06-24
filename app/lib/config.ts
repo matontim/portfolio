@@ -1,16 +1,14 @@
 export const metaData = {
-  baseUrl: "https://nextfolio-template.vercel.app/",
-  title: "Nextfolio",
-  name: "Sirius",
+  baseUrl: "http://localhost:3000", //update when deployed
+  title: "Madeline", //logo should go here
+  name: "Madeline Matonti",
   ogImage: "/opengraph-image.png",
   description:
-    "A clean, fast, and lightweight portfolio template built with Next.js, Vercel, and Tailwind CSS for optimal performance.",
+    "Medical Laboratory Scientist and M.sc. Bioinformatics student with experience in RNA-seq analysis, computational biology workflows, and full-stack application development.",
 };
 
 export const socialLinks = {
-  twitter: "https://x.com/1tssirius",
-  github: "https://github.com/1msirius/Nextfolio",
-  instagram: "https://www.instagram.com/",
-  linkedin: "https://www.linkedin.com/",
-  email: "mailto:example@gmail.com",
+  github: "https://github.com/matontim",
+  linkedin: "https://www.linkedin.com/in/madeline-matonti",
+  email: "mailto:linniesage@gmail.com",
 };

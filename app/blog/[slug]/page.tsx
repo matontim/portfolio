@@ -14,9 +14,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
+}: {
+  params: { slug: string };
 }): Promise<Metadata | undefined> {
-  const { slug } = await params;
-  let post = getBlogPosts().find((post) => post.slug === slug);
+  let post = getBlogPosts().find((post) => post.slug === params.slug);
+
   if (!post) {
     return;
   }
@@ -27,6 +29,7 @@ export async function generateMetadata({
     summary: description,
     image,
   } = post.metadata;
+
   let ogImage = image
     ? image
     : `${metaData.baseUrl}/og?title=${encodeURIComponent(title)}`;
@@ -55,9 +58,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function Blog({ params }) {
-  const { slug } = await params;
-  let post = getBlogPosts().find((post) => post.slug === slug);
+export default async function Blog({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  let post = getBlogPosts().find((post) => post.slug === params.slug);
 
   if (!post) {
     notFound();
@@ -87,13 +93,18 @@ export default async function Blog({ params }) {
           }),
         }}
       />
-      <h1 className="title mb-3 font-medium text-2xl">{post.metadata.title}</h1>
+
+      <h1 className="prose title mb-3 font-medium text-2xl">
+        {post.metadata.title}
+      </h1>
+
       <div className="flex justify-between items-center mt-2 mb-8 text-medium">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+        <p className="text-neutral-600 dark:text-neutral-400">
           {formatDate(post.metadata.publishedAt)}
         </p>
       </div>
-      <article className="prose prose-quoteless prose-neutral dark:prose-invert">
+
+      <article className="prose prose-quoteless prose-neutral dark:prose-invert max-w-none">
         <CustomMDX source={post.content} />
       </article>
     </section>

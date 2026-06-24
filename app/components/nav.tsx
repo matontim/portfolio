@@ -3,33 +3,41 @@ import { ThemeSwitch } from "./theme-switch";
 import { metaData } from "../lib/config";
 
 const navItems = {
+  "/": { name: "Home" },
   "/blog": { name: "Blog" },
   "/projects": { name: "Projects" },
-  "/photos": { name: "Photos" },
+  "/#contact": { name: "Contact" }
 };
 
 export function Navbar() {
   return (
-    <nav className="lg:mb-16 mb-12 py-5">
-      <div className="flex flex-col md:flex-row md:items-center justify-between">
-        <div className="flex items-center">
-          <Link href="/" className="text-3xl font-semibold">
-            {metaData.title}
-          </Link>
-        </div>
-        <div className="flex flex-row gap-4 mt-6 md:mt-0 md:ml-auto items-center">
-          {Object.entries(navItems).map(([path, { name }]) => (
-            <Link
-              key={path}
-              href={path}
-              className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative"
-            >
-              {name}
-            </Link>
-          ))}
-          <ThemeSwitch />
+    <header className="mb-8">
+      <div className="hero-bar">
+        <Link href="/">
+          <img src="/del-icon.svg" alt={metaData.name} className="h-30 w-auto" />
+        </Link>
+        <div className="hero-text">
+          <h1 className="hero-title">MADELINE MATONTI</h1>
+          <p className="hero-subtitle">Curiosity Drives Progress</p>
         </div>
       </div>
-    </nav>
+
+      <nav className="navbar">
+        <div className="flex gap-[10px]">
+        {Object.entries(navItems).map(([path, { name }]) => (
+          <Link
+            key={path}
+            href={path}
+            className="nav-button"
+          >
+            {name}
+          </Link>
+        ))}
+        </div>
+        <span style={{ marginLeft: "auto" }}>
+          <ThemeSwitch />
+        </span>
+      </nav>
+    </header>
   );
 }

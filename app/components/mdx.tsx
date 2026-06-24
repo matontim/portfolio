@@ -10,6 +10,7 @@ import { ImageGrid } from "./image-grid";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import "katex/dist/katex.min.css";
+import remarkGfm from 'remark-gfm';
 
 function CustomLink(props) {
   let href = props.href;
@@ -126,7 +127,7 @@ export function CustomMDX(props) {
       components={{ ...components, ...(props.components || {}) }}
       options={{
         mdxOptions: {
-          remarkPlugins: [remarkMath],
+          remarkPlugins: [remarkMath, remarkGfm],
           rehypePlugins: [rehypeKatex],
         },
       }}

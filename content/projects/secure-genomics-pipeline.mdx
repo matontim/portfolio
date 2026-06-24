@@ -1,0 +1,189 @@
+---
+title: "SECURE GENOMIC DATA ANALYSIS"
+publishedAt: "2026"
+summary: "Bioinformatics workflow using Python and R for quality control, normalization, PCA, and differential expression analysis of ALDH1A3 inhibition in breast cancer cell lines."
+tags: ["Drug Discovery", "RNA-seq", "Bioinformatics", "Python", "R"]
+---
+## Overview
+This project explores transcriptomic changes associated with ALDH1A3 inhibition in breast cancer cell lines using an RNA-seq analysis workflow built in Python and R. The pipeline includes quality control, normalization, principal component analysis (PCA), differential expression analysis, and a short data integrity demonstration for secure genomics workflows. ALDH1A3 is an enzyme involved in retinoic acid synthesis and has been linked to tumor progression and immune suppression in several cancers. Recent work suggests that ALDH1A3-derived retinoic acid may suppress anti-tumor immune responses through paracrine signaling rather than directly affecting tumor cell growth. Using publicly available RNA-seq data from ALDH1A3 inhibition experiments, this project investigates how blocking ALDH1A3 alters gene expression patterns and compares findings against published results from Esposito et al. (2025). [View the GitHub Repository](https://github.com/matontim/secure-genomics-pipeline).
+
+---
+
+## Biological Context
+ALDH1A3 converts retinaldehyde into all-trans retinoic acid (atRA), a signaling molecule historically associated with tumor suppression. However, recent evidence suggests that ALDH1A3-expressing tumors may become resistant to retinoid signaling while still using atRA to suppress anti-tumor immunity in the tumor microenvironment. In the referenced study, researchers developed the ALDH1A3 inhibitor MBE1.5 to investigate how ALDH1A3 inhibition reshapes gene expression in cancer cells (Esposito et al., 2025, iScience 28, 113675).
+
+This project uses publicly available RNA-seq data [(GSE260586)](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE260586) from experiments treating four breast cancer cell lines with ALDH1A3 inhibitor MBE1.5.
+ 
+<strong>Key biological question:</strong> Does ALDH1A3 inhibition produce a cell-intrinsic transcriptomic response in retinoid-insensitive breast cancer cell lines?
+
+---
+
+## Experimental Design
+Four breast cancer cell lines, MDA-MB-468, SUM159-M1a, HCC1937 (ALDH1A3 positive) and 1833TR-p94 (ALDH1A3 negative), were treated with MBE1.5 vs. 0.1% DMSO control for 9 hours.
+Total RNA were extracted from the cells and whole transcriptome expression were determined by RNA-seq, producing the FPKM+1 values used in this project (Esposito et al., 2025, *iScience* 28, 113675).
+
+
+| Cell Line | ALDH1A3 Status | Role |
+|-----------|---------------|------|
+| MDA-MB-468 | Positive | Treatment target |
+| SUM159-M1a | Positive | Treatment target |
+| HCC1937 | Positive | Treatment target |
+| 1833TR-p94 | Negative | Control |
+
+
+---
+
+## Step 1: QC, Normalization, and Exploratory Data Analysis
+The raw FPKM+1 expression matrix was log2-transformed to stabilize variance across the dynamic range. Initial inspection checked distributions across samples and boxplots confirmed uniform post-normalization spread across all 16 samples.
+```python
+# log2(FPKM + 1) transformation
+log2expr = np.log2(df + 1)
+
+# Save for downstream analysis
+log2expr.to_csv("data/processed/log2_expression.csv")
+```
+ 
+{/* Figure: Log2 expression distribution boxplot */}
+![Log2 expression distribution boxplot](/projects/genomics/boxplot_log2_expression.png)
+
+{/* Figure: Log2 expression distribution violin plot */}
+![Log2 expression distribution violin plot](/projects/genomics/log2_expression_distribution.png)
+
+The data was then transposed and verified by plotting the distribution of log-transformed expression values.
+```python
+# Transpose data to have samples as rows and genes as columns
+log2expr_T = log2expr.T     
+```
+{/* Figure: Log2 expression distribution after transposing */}
+![Log2 expression distribution after transposing](/projects/genomics/log2_expression_distribution.png)
+
+---
+
+## Step 2: Principal Component Analysis (PCA)
+The data was scaled in preparation for PCA, and PCA was run on the full log2 expression matrix to identify the major axes of variance across all samples. The top two components captured **58.2%** of total variance.
+```python
+# Scale the data
+scaler = StandardScaler()
+scaled_T = scaler.fit_transform(log2expr_T)
+
+# PCA with multiple components
+pca = PCA(n_components=8)
+pca_T = pca.fit_transform(scaled_T)
+
+By plotting both the explained variance (Scree plot) and the explained cumulative variance by principal component confirmed that the first two components make up 80% of variance.
+
+# Explained variance
+explained_var = pca.explained_variance_ratio_
+print("Explained variance ratios:", pca.explained_variance_ratio_)
+```
+{/* Figure: Scree plot for explained variance */}
+![Scree plot for explained variance](/projects/genomics/scree_plot.png)
+
+{/* Figure: Cumulative explained variance*/}
+![Cumulative explained variance](/projects/genomics/cumulative_variance.png)
+
+PCA was ran again with two components for further analysis, and samples were labeled by both cell line and treatment condition to determine whether clustering was driven by cell line identity or MBE1.5 treatment.
+```python
+# PCA with 2 components
+pca2 = PCA(n_components=2)
+pcs2 = pca2.fit_transform(scaled_T)
+
+pc1_var = pca2.explained_variance_ratio_[0] * 100
+pc2_var = pca2.explained_variance_ratio_[1] * 100
+
+# Create new DataFrame with PCs
+pca_df = pd.DataFrame(data=pcs2, columns=['PC1', 'PC2'], index=log2expr_T.index)
+```
+
+{/* Figure: PCA labeled by cell line and treatment */}
+![PCA labeled by cell line and treatment](/projects/genomics/pca_labeled.png)
+
+---
+
+## Step 3: Differential Expression Analysis
+Within each of the four cell lines, treatment (MBE1.5) and control (DMSO) samples were compared using paired t-tests on log2 expression values. Log2 fold changes were computed as mean paired differences and plotted as a volcano plot (−log10 p-value vs. log2FC).
+
+{/* Figure: Volcano plot MBE1.5 vs DMSO */}
+![Volcano plot MBE1.5 vs DMSO](/projects/genomics/volcano_plot.png)
+
+Two genes stood out as top upregulated hits across cell lines:
+ 
+| Gene | Biological Role | Interpretation |
+|---|---|---|
+| **CYP1A1** | Aryl hydrocarbon receptor (AhR) target | Off-target AhR response to MBE1.5 |
+| **CYP1B1** | AhR target, xenobiotic metabolism | Off-target AhR response to MBE1.5 |
+ 
+The absence of other significant hits corroborates the paper's conclusion that ALDH1A3 inhibition produces no meaningful cell-intrinsic transcriptomic response in these retinoid-insensitive breast cancer cells.
+
+---
+
+## Step 4: Cross Langauge Validation
+Validated PCA results using R to demonstrate cross-language reproducibility. Confirmed that observed variance structure is not dependent on a specific software system. PCA was reproduced independently in R using `prcomp()` with scaling 
+enabled to match the Python `StandardScaler` preprocessing.
+
+```R
+# Pull processed data
+data <- read.csv(
+    "data/processed/log2_expression.csv", 
+    row.names = 1, 
+    check.names = FALSE
+    )
+# Transpose so rows are samples and columns are genes
+data_t <- t(data)
+
+# Perform PCA without scaling
+pca <- prcomp(data_t, scale. = TRUE)
+summary(pca)
+```
+![R PCA labeled by cell line and treatment](/projects/genomics/pca_r.png)
+
+The R implementation produces identical variance percentages 
+(PC1: 32.9%, PC2: 25.3%) and the same clustering pattern, confirming 
+cross-language reproducibility.
+
+---
+
+## Step 5: Secure Data Handling Demo
+Demonstrated basic secure data handling concepts relevant to genomic workflows. Demonstrated hashing and encryption to show awareness of data integrity and secure computational practices.
+
+---
+
+## Comparison to Published Findings
+Clustering in PCA is driven by cell line identity, not by MBE1.5 treatment, consistent with Figure 4E of Esposito et al. (2025).
+ 
+PCA was independently reproduced in R using `prcomp()` on the same log2 matrix. Both Python (scikit-learn) and R yielded identical variance explained, confirming the result is not software-dependent.
+Calculated PCA scores (PC1: 32.9%, PC2: 25.3%) closely match published values (PC1: 32.46%, PC2: 25.63%) (Esposito et al., 2025, iScience 28, 113675). Consistent with Figure 4E of the paper, clustering observed in PCA is due to cell line grouping rather than treatment with MBE1.5 or DMSO. 
+
+![PCA labeled by cell line and treatment](/projects/genomics/pca_labeled.png)
+
+CYP1A1 and CYP1B1 appear as top upregulated genes, consistent with experimental findings which identified these as off-target aryl hydrocarbon receptor responses to MBE1.5 (Esposito et al., 2025, iScience 28, 113675). The absence of other significant hits corroborates the paper's conclusion that ALDH1A3 inhibition produces no cell-intrinsic transcriptomic response in these retinoid-insensitive cell lines.
+
+![Volcano plot MBE1.5 vs DMSO](/projects/genomics/volcano_plot.png)
+
+---
+
+## Notes and Limitations
+- Sample grouping was derived from GEO Series metadata describing treatment with both MBE1.5 and DMSO control across four breast cancer cell lines.
+- Due to limited sample size, differential expression analysis serves as methodological demonstration for educational purposes. With only two replicates per condition per cell line, statistical power is limited. This analysis serves as a methodological demonstration; definitive biological inference would require DESeq2 or edgeR with more replicates.
+- The security demonstration is conceptual and educational, not a production deployment.
+
+---
+
+## Tools
+Python, R, pandas, numpy, scipy, matplotlib, scikit-learn, Git
+
+---
+
+## Key Takeaways
+ 
+- PCA scores (PC1: 32.9%, PC2: 25.3%) closely matched published values, confirming the pipeline was implemented correctly on publicly available data.
+- Variance structure is driven by cell line identity, not treatment condition, suggesting MBE1.5 does not dramatically alter the transcriptome of retinoid-insensitive lines.
+- CYP1A1 and CYP1B1 are the only significantly upregulated genes, consistent with an off-target aryl hydrocarbon receptor response to MBE1.5.
+- Cross-language validation (Python + R) confirmed results are not dependent on a specific computational tool.
+- The security notebook highlights data integrity and encryption as important considerations for any pipeline handling patient genomic data.
+- **Future direction:** Apply more robust methods (DESeq2, edgeR) with additional replicates.
+
+---
+
+## Citations
+1. Esposito M, Fang C, Wei Y, Pozzan A, Beato C, Su X, Hutton JE III, Reed T, Hang X, Perini ED, Wang W, Cheng X, Pan Y, Yu J, Kane M, Manoharan M, Proudfoot J, Cristea IM, Kang Y. Development of retinoid nuclear receptor pathway antagonists through targeting aldehyde dehydrogenase 1A3. *iScience*. 2025;28:113675. https://doi.org/10.1016/j.isci.2025.113675

@@ -2,20 +2,22 @@ export interface Project {
   title: string;
   year: number;
   description: string;
-  url: string;
+  slug: string;
 }
 
 export const projects: Project[] = [
   {
-    title: "Mithril AI",
-    year: 2024,
-    description: "Open science AI resarch lab",
-    url: "https://github.com/mithrilai",
+    title: "Secure Genomics Pipeline",
+    year: 2026,
+    description:
+      "Bioinformatics workflow using Python and R for quality control, normalization, PCA, and differential expression analysis.",
+    slug: "secure-genomics-pipeline",
   },
   {
-    title: "OpenDeepLearning",
-    year: 2023,
-    description: "Open source AI education resources",
-    url: "https://opendeeplearning.xyz/",
+    title: "Study Planner Web Application",
+    year: 2026,
+    description:
+      "Full-stack productivity application currently in deployment, focused on API integration, frontend-backend communication, and user-centered design.",
+    slug: "study-planner-web-app",
   },
 ];
