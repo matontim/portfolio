@@ -110,7 +110,6 @@ let components = {
   Image: RoundedImage,
   ImageGrid,
   a: CustomLink,
-  StaticTweet: TweetComponent,
   Caption: CaptionComponent,
   YouTube: YouTubeComponent,
   code: Code,
