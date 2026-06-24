@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@import "./components/tweet.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 @import url('https://fonts.googleapis.com/css2?family=Georgia&family=Trebuchet+MS&display=swap');
@@ -175,11 +174,6 @@ input[type="email"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-}
-
-.prose .tweet a {
-  text-decoration: inherit;
-  font-weight: 500;
 }
 
 table {
