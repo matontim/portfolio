@@ -44,17 +44,17 @@ function readMDXFile(filePath: string) {
 function getMDXData(dir: string) {
   let mdxFiles = getMDXFiles(dir);
 
-  return mdxFiles.map((file) => {
-    let { metadata, content } = readMDXFile(path.join(dir, file));
+  return mdxFiles
+    .map((file) => {
+      const result = readMDXFile(path.join(dir, file));
+      if (!result) return null;
 
-    let slug = path.basename(file, path.extname(file));
+      const { metadata, content } = result;
+      const slug = path.basename(file, path.extname(file));
 
-    return {
-      metadata,
-      slug,
-      content,
-    };
-  });
+      return { metadata, slug, content };
+    })
+    .filter((item): item is NonNullable<typeof item> => item !== null);
 }
 
 export function getProjectPosts() {

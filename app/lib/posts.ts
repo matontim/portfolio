@@ -12,7 +12,11 @@ type Metadata = {
 function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
   let match = frontmatterRegex.exec(fileContent);
-  let frontMatterBlock = match![1];
+  if (!match) {
+    console.warn("Skipping MDX file with missing frontmatter");
+    return null;
+  }
+  let frontMatterBlock = match[1];
   let content = fileContent.replace(frontmatterRegex, "").trim();
   let frontMatterLines = frontMatterBlock.trim().split("\n");
   let metadata: Partial<Metadata> = {};
@@ -20,7 +24,7 @@ function parseFrontmatter(fileContent: string) {
   frontMatterLines.forEach((line) => {
     let [key, ...valueArr] = line.split(": ");
     let value = valueArr.join(": ").trim();
-    value = value.replace(/^['"](.*)['"]$/, "$1"); 
+    value = value.replace(/^['"](.*)['"]$/, "$1");
     metadata[key.trim() as keyof Metadata] = value;
   });
 
@@ -38,16 +42,17 @@ function readMDXFile(filePath: string) {
 
 function getMDXData(dir: string) {
   let mdxFiles = getMDXFiles(dir);
-  return mdxFiles.map((file) => {
-    let { metadata, content } = readMDXFile(path.join(dir, file));
-    let slug = path.basename(file, path.extname(file));
+  return mdxFiles
+    .map((file) => {
+      const result = readMDXFile(path.join(dir, file));
+      if (!result) return null;
 
-    return {
-      metadata,
-      slug,
-      content,
-    };
-  });
+      const { metadata, content } = result;
+      const slug = path.basename(file, path.extname(file));
+
+      return { metadata, slug, content };
+    })
+    .filter((item): item is NonNullable<typeof item> => item !== null);
 }
 
 export function getBlogPosts() {
