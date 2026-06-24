@@ -4,9 +4,6 @@ import { socialLinks } from "./lib/config";
 export default function Page() {
   return (
     <main className="main">
-      <a href={socialLinks.twitter} target="_blank">
-      </a>
-
       <section className="panel profile">
         <div className="panel-header">
           <h2>PROFILE</h2>
