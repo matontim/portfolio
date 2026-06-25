@@ -1,5 +1,5 @@
 export const metaData = {
-  baseUrl: "http://localhost:3000", //update when deployed
+  baseUrl: "https://portfolio-one-rho-d082xpgl4f.vercel.app/",
   title: "Madeline", //logo should go here
   name: "Madeline Matonti",
   ogImage: "/opengraph-image.png",
