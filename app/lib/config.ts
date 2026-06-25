@@ -4,7 +4,7 @@ export const metaData = {
   name: "Madeline Matonti",
   ogImage: "/opengraph-image.png",
   description:
-    "Medical Laboratory Scientist and M.sc. Bioinformatics student with experience in RNA-seq analysis, computational biology workflows, and full-stack application development.",
+    "Medical Laboratory Scientist and M.S. Bioinformatics student with experience in RNA-seq analysis, computational biology workflows, and full-stack application development.",
 };
 
 export const socialLinks = {
