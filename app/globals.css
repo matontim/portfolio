@@ -9,24 +9,18 @@
   color: #fefefe;
 }
 
-/* Light theme colors */
+/* ==========================================================================
+   DESIGN TOKENS
+   ========================================================================== */
 :root {
-  --sh-class: #2d5e9d;
-  --sh-identifier: #354150;
-  --sh-sign: #8996a3;
-  --sh-string: #007f7a;
-  --sh-keyword: #e02518;
-  --sh-comment: #a19595;
-  --sh-jsxliterals: #6266d1;
-  --sh-property: #e25a1c;
-  --sh-entity: #e25a1c;
-  --color-ink: #123857;
   background-color: #F7F4EF;
+  --color-ink: #123857;
   --panel: #FFFEFB;
   --shadow-light: rgba(255, 255, 255, 0.7);
   --shadow-dark: rgba(18, 56, 87, 0.25);
   --teal-light: #2C8C96;
   --teal: #1F6F78;
+  --navy: #123857;
 }
 
 /* Dark theme colors */
@@ -43,11 +37,19 @@
   --sh-entity: #e25a1c;
 }
 
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
 * {
   box-sizing: border-box;
 }
 
-/** typeface **/
+html {
+  min-width: 360px;
+  font-size: 18px;
+}
+
 body {
   font-family: var(--font-serif), sans-serif;
 }
@@ -56,10 +58,9 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif), serif;
 }
 
-html {
-  min-width: 360px;
-  font-size: 18px;
-}
+/* ==========================================================================
+   PROSE
+   ========================================================================== */
 
 .prose {
   @apply text-[#123857] dark:text-[#F7F4EF];
@@ -198,6 +199,14 @@ table {
   text-wrap: balance;
 }
 
+.main {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0 20px;
+}
+
+/* ================= HERO ================= */
+
 .hero-bar {
   display: flex;
   align-items: center;
@@ -247,6 +256,8 @@ table {
   color: #5BC8E8;
 }
 
+/* ================= NAVBAR ================= */
+
 .navbar {
   display: flex;
   flex-wrap: wrap;
@@ -260,6 +271,14 @@ table {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 6px 6px 0 rgba(18, 56, 87, 0.1);
   width: 100%;
 }
+
+.dark .navbar {
+  background: linear-gradient(180deg, #1B3A5C 0%, #0D1B2A 100%);
+  border-color: #5BC8E8;
+  box-shadow: inset 0 1px 0 rgba(91, 200, 232, 0.15), 6px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* ================= NAV BUTTONS ================= */
 
 .nav-button {
   display: inline-block;
@@ -276,25 +295,19 @@ table {
   transition: transform 0.06s ease, box-shadow 0.06s ease, background 0.1s ease;
 }
 
+.dark .nav-button {
+  background: linear-gradient(180deg, #1F4A6E 0%, #123857 100%);
+  border-color: #3A5A7A;
+  color: #5BC8E8;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
 .nav-button:active {
   border-style: inset;
   background: linear-gradient(180deg, #0F2E47 0%, var(--navy) 100%);
   color: var(--paper);
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
   transform: translate(1px, 1px);
-}
-
-.dark .navbar {
-  background: linear-gradient(180deg, #1B3A5C 0%, #0D1B2A 100%);
-  border-color: #5BC8E8;
-  box-shadow: inset 0 1px 0 rgba(91, 200, 232, 0.15), 6px 6px 0 rgba(0, 0, 0, 0.3);
-}
-
-.dark .nav-button {
-  background: linear-gradient(180deg, #1F4A6E 0%, #123857 100%);
-  border-color: #3A5A7A;
-  color: #5BC8E8;
-  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 
 .dark .nav-button:active {
@@ -304,11 +317,11 @@ table {
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-.main {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 0 20px;
+.nav-button:hover {
+  color: var(--navy);
 }
+
+/* ================= PROFILE ================= */
 
 .profile-body {
   display: flex;
@@ -333,6 +346,8 @@ table {
   flex: 1;
   min-width: 0;
 }
+
+/* ================= PANELS ================= */
 
 .panel {
   background: var(--panel);
@@ -370,23 +385,6 @@ table {
   border-bottom-color: #5BC8E8;
 }
 
-.pill-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-
-.pill {
-  font-size: 0.8rem;
-  font-weight: 600;
-  background: linear-gradient(180deg, #FFFEFB 0%, #ECF4F4 100%);
-  border: 1px solid var(--teal);
-  color: var(--teal);
-  border-radius: 1px;
-  padding: 4px 11px;
-  box-shadow: 1px 1px 0 rgba(31, 111, 120, 0.15);
-}
-
 .profile, .tools, .contact {
   width: 100%;
 }
@@ -415,5 +413,24 @@ table {
 
 .dark .panel-divider {
   border-top-color: #2A4A6A;
+}
+
+/* ================= PILL ================= */
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pill {
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: linear-gradient(180deg, #FFFEFB 0%, #ECF4F4 100%);
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  border-radius: 1px;
+  padding: 4px 11px;
+  box-shadow: 1px 1px 0 rgba(31, 111, 120, 0.15);
 }
 
