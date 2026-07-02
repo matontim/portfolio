@@ -80,11 +80,17 @@
   --sh-entity:      #e25a1c;
 }
 
-* {
-  box-sizing: border-box;
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+* {box-sizing: border-box;}
+
+html {
+  min-width: 360px;
+  font-size: 18px;
 }
 
-/** typeface **/
 body {
   font-family: var(--font-serif), sans-serif;
 }
@@ -93,13 +99,37 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif), serif;
 }
 
-html {
-  min-width: 360px;
-  font-size: 18px;
+/* Remove Safari input shadow on mobile */
+input[type="text"],
+input[type="email"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+table {
+  display: block;
+  max-width: fit-content;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Prose (blog / MDX content)
+   ========================================================================== */
+
+
 .prose {
-  @apply text-[#123857] dark:text-[#F7F4EF];
+  color: var(--color-ink);
 }
 
 .prose .anchor {
@@ -115,25 +145,28 @@ html {
   @apply visible;
 }
 
-.prose a {
-  @apply transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em] font-normal text-[#123857] dark:text-[#5BC8E8];
-}
-
-.prose a:hover {
-  @apply dark:decoration-neutral-400 decoration-neutral-600;
-}
-
-.prose .anchor:after {
-  @apply text-neutral-300 dark:text-neutral-700;
-  content: "#";
-}
-
 .prose *:hover > .anchor {
   @apply visible;
 }
 
+.prose .anchor:after {
+  content: "#"; 
+  color: var(--color-divider);
+}
+
+.prose a {
+  @apply transition-all underline-offset-2 decoration-[0.1em] font-normal;
+  color: var(--color-ink);
+  text-decoration-color: var(--color-divider);
+}
+
+.prose a:hover {
+  text-decoration-color: var(--color-muted);
+}
+
 .prose pre {
-  @apply bg-[#F7F7F7] dark:bg-[#181818] rounded-lg overflow-x-auto;
+  background: var(--color-code-bg);
+  @apply rounded-1g overflow-x-auto;
 }
 
 .prose code {
@@ -164,21 +197,12 @@ html {
 }
 
 :is(.prose, .prose *):is(h1, h2, h3, h4, h5, h6) {
-  color: #123857;
-}
-
-.dark :is(.prose, .prose *):is(h1, h2, h3, h4, h5, h6) {
-  color: #5BC8E8;
+  color: var(--color-ink);
 }
 
 .prose strong,
 .prose th {
-  color: #123857;
-}
-
-.dark .prose strong,
-.dark .prose th {
-  color: #5BC8E8;
+  color: var(--color-ink);
 }
 
 .prose strong {
@@ -196,54 +220,39 @@ html {
   content: none;
 }
 
-pre::-webkit-scrollbar {
-  display: none;
-}
-
-pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-/* Remove Safari input shadow on mobile */
-input[type="text"],
-input[type="email"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-table {
-  display: block;
-  max-width: fit-content;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
 .prose .callout > p {
   margin: 0;
-}
-
-/** sections **/
-.role {
-  border-bottom: none;
-  color: var(--teal);
-  font-weight: 600;
 }
 
 .title {
   text-wrap: balance;
 }
 
+/* still need? */
+
+.dark :is(.prose, .prose *):is(h1, h2, h3, h4, h5, h6) {
+  color: #5BC8E8;
+}
+
+.dark .prose strong,
+.dark .prose th {
+  color: #5BC8E8;
+}
+
+/* ==========================================================================
+   Masthead / hero bar
+   ========================================================================== */
+
 .hero-bar {
   display: flex;
   align-items: center;
   gap: 24px;
   padding: 16px 20px;
-  background: var(--panel);
+  background: var(--color-panel);
   border: 2px solid var(--color-ink);
   border-bottom: none;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 6px 6px 0 rgba(18, 56, 87, 0.1);
+  box-shadow: inset 0 1px 0 var(--shadow-inset),
+    6px 6px 0 var(--shadow-panel);
 }
 
 .hero-text {
@@ -268,6 +277,16 @@ table {
   font-size: 0.95rem;
   color: var(--teal);
   margin: 0;
+}
+
+/* ==========================================================================
+   Navbar
+   ========================================================================== */
+
+.role {
+  border-bottom: none;
+  color: var(--teal);
+  font-weight: 600;
 }
 
 .dark .hero-bar {
