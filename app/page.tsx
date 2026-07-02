@@ -22,6 +22,7 @@ export default function Page() {
       <div className="profile-text">
       <h3 className="prose text-2xl tracking-tight font-bold mb-2">Madeline Matonti, C(ASCP)<sup>CM</sup></h3>
       <p className="role text-sm">Medical Laboratory Scientist at Massachusetts General Hospital</p>
+      <p className="role text-sm">Bioinformatics Intern in the Balaj Lab at the Mass General Brigham Dept. of Neurosurgery</p>
       <p className="role text-sm mb-2">M.S. Bioinformatics Student at Boston University</p>
       <hr className="panel-divider" />
       <div className="prose dark:prose-invert max-w-none bio">
