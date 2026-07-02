@@ -25,7 +25,7 @@ export default function Page() {
       <p className="role text-sm">Bioinformatics Intern in the Balaj Lab at the Mass General Brigham Dept. of Neurosurgery</p>
       <p className="role text-sm mb-2">M.S. Bioinformatics Student at Boston University</p>
       <hr className="panel-divider" />
-      <div className="prose dark:prose-invert max-w-none bio">
+      <div className="prose max-w-none bio">
         <p>I am a Bioinformatics Master's student with experience in RNA-seq analysis, genomic data processing, statistical modeling, and scientific programming. Through independent projects and research experiences, I have developed computational workflows for biological data analysis and reproducible research.</p>
         <p>I am particularly interested in combining bioinformatics with full-stack web development to create user-friendly tools for data visualization, analysis, and scientific collaboration. My long-term interests include multi-omics data integration, machine learning, drug discovery, and building software that lowers barriers to computational research.</p>
       </div>
@@ -42,7 +42,7 @@ export default function Page() {
             <span className="font-bold text-sm">
               M.S. Bioinformatics | Boston University
             </span>
-            <span className="text-neutral-600 dark:text-neutral-400 text-xs">
+            <span className="text-[var(--color-muted)] text-xs">
               Expected 2027
             </span>
           </li>
@@ -51,7 +51,7 @@ export default function Page() {
             <span className="font-bold text-sm">
               B.A. Biochemistry and Molecular Biology | Boston University
             </span>
-            <span className="text-neutral-600 dark:text-neutral-400 text-xs">
+            <span className="text-[var(--color-muted)] text-xs">
               2024
             </span>
           </li>
@@ -65,8 +65,8 @@ export default function Page() {
         <div className="not-prose space-y-3">
           <img width="100" height="100" alt="c-ascp-scientist-in-chemistry" src="https://github.com/user-attachments/assets/4ccde033-1a93-4e97-9ff8-8a62d2be002c" />
           <p className="font-bold mb-1 text-sm">Scientist in Chemistry, C(ASCP)<sup>CM</sup></p>
-          <p className="text-neutral-600 dark:text-neutral-400 text-xs mb-1">ASCP Board of Certification</p>
-          <p className="text-neutral-600 dark:text-neutral-400 text-xs">Issued: [May 2026] – Expires: [May 2029]</p>
+          <p className="text-[var(--color-muted)] text-xs mb-1">ASCP Board of Certification</p>
+          <p className="text-[var(--color-muted)] text-xs">Issued: [May 2026] – Expires: [May 2029]</p>
         </div>
       </section>
 
