@@ -305,7 +305,7 @@ table {
 .nav-button:active {
   border-style: inset;
   background: linear-gradient(180deg, #0F2E47 0%, var(--navy) 100%);
-  color: var(--paper);
+  color: var(--panel);
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
   transform: translate(1px, 1px);
 }
@@ -318,7 +318,8 @@ table {
 }
 
 .nav-button:hover {
-  color: var(--navy);
+  background-color: var(--navy);
+  color: var(--panel);
 }
 
 /* ================= PROFILE ================= */
