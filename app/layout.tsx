@@ -11,7 +11,7 @@ import { metaData } from "./lib/config";
 
 const inter = Inter({ subsets: ["latin"] }); // keep for fallback
 const lora = Lora({ subsets: ["latin"], variable: "--font-serif" });
-const sourceSans = Source_Sans_3({ subsets: ["latin"], variable: "--font-sans" });
+const sourceSans = Source_Sans_3({ subsets: ["latin"], variable: "--font-serif" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(metaData.baseUrl),
@@ -72,7 +72,7 @@ export default function RootLayout({
           title="JSON Feed"
         />
       </head>
-      <body className="antialiased flex flex-col items-center justify-center mx-auto mt-2 lg:mt-8 mb-12 bg-[#F7F4EF] text-[#123857] dark:bg-[#0D1B2A] dark:text-[#F7F4EF]">
+      <body className="antialiased flex flex-col items-center justify-center mx-auto mt-2 lg:mt-8 mb-12">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
