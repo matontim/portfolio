@@ -302,7 +302,7 @@ table {
   box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 
-.nav-button:active {
+.nav-button.active {
   border-style: inset;
   background: linear-gradient(180deg, #0F2E47 0%, var(--navy) 100%);
   color: var(--panel);
@@ -310,7 +310,7 @@ table {
   transform: translate(1px, 1px);
 }
 
-.dark .nav-button:active {
+.dark .nav-button.active {
   background: linear-gradient(180deg, #0A1F33 0%, #0D1B2A 100%);
   border-style: inset;
   color: #F7F4EF;
@@ -318,7 +318,7 @@ table {
 }
 
 .nav-button:hover {
-  background-color: var(--navy);
+  background: linear-gradient(180deg, #0F2E47 0%, var(--navy) 100%);
   color: var(--panel);
 }
 
