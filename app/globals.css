@@ -9,88 +9,45 @@
   color: #fefefe;
 }
 
-/* ==========================================================================
-   Design tokens
-   ========================================================================== */
-
+/* Light theme colors */
 :root {
-  /* Brand palette */
-  --color-ink:      #123857;   /* primary text, borders, headings */
-  --color-bg:       #F7F4EF;   /* page background                 */
-  --color-panel:    #FFFEFB;   /* card / panel surface            */
-  --color-teal:     #1F6F78;   /* accent, role text, pills        */
-  --color-teal-hi:  #2C8C96;   /* panel header gradient top       */
-  --color-muted:    #6B6459;   /* dates, metadata, secondary text */
-  --color-divider:  #C0B9A8;   /* hr / panel-divider              */
-  --color-code-bg:  #F7F7F7;   /* inline + block code background  */
-
-  /* Bevel / shadow */
-  --bevel-hi:       #FFFFFF;
-  --bevel-lo:       #404040;
-  --shadow-panel:   rgba(18, 56, 87, 0.12);
-  --shadow-inset:   rgba(255, 255, 255, 0.7);
-
-  /* Nav chrome */
-  --nav-bg-top:     #E6E2D8;
-  --nav-bg-bot:     #CFC9BC;
-  --btn-bg-top:     #FFFEFB;
-  --btn-bg-bot:     #E9E4D8;
-  --btn-border:     #E0DACB;
-
-  /* Syntax highlighting (consumed by sugar-high at runtime) */
-  --sh-class:       #2d5e9d;
-  --sh-identifier:  #354150;
-  --sh-sign:        #8996a3;
-  --sh-string:      #007f7a;
-  --sh-keyword:     #e02518;
-  --sh-comment:     #a19595;
+  --sh-class: #2d5e9d;
+  --sh-identifier: #354150;
+  --sh-sign: #8996a3;
+  --sh-string: #007f7a;
+  --sh-keyword: #e02518;
+  --sh-comment: #a19595;
   --sh-jsxliterals: #6266d1;
-  --sh-property:    #e25a1c;
-  --sh-entity:      #e25a1c;
+  --sh-property: #e25a1c;
+  --sh-entity: #e25a1c;
+  --color-ink: #123857;
+  background-color: #F7F4EF;
+  --panel: #FFFEFB;
+  --shadow-light: rgba(255, 255, 255, 0.7);
+  --shadow-dark: rgba(18, 56, 87, 0.25);
+  --teal-light: #2C8C96;
+  --teal: #1F6F78;
 }
 
+/* Dark theme colors */
 .dark {
-  --color-ink:      #5BC8E8;
-  --color-bg:       #0D1B2A;
-  --color-panel:    #0F2233;
-  --color-teal:     #2C8C96;
-  --color-teal-hi:  #1B3A5C;
-  --color-muted:    #6E8499;
-  --color-divider:  #2A4A6A;
-  --color-code-bg:  #181818;
-
-  --bevel-hi:       #3A5A7A;
-  --bevel-lo:       #000000;
-  --shadow-panel:   rgba(0, 0, 0, 0.35);
-  --shadow-inset:   rgba(91, 200, 232, 0.1);
-
-  --nav-bg-top:     #1B3A5C;
-  --nav-bg-bot:     #0D1B2A;
-  --btn-bg-top:     #1F4A6E;
-  --btn-bg-bot:     #123857;
-  --btn-border:     #3A5A7A;
-
-  --sh-class:       #4c97f8;
-  --sh-identifier:  white;
-  --sh-string:      #0fa295;
-  --sh-keyword:     #f47067;
-  --sh-comment:     #a19595;
+  background-color: #0D1B2A;
+  --sh-class: #4c97f8;
+  --sh-identifier: white;
+  --sh-sign: #8996a3;
+  --sh-string: #0fa295;
+  --sh-keyword: #f47067;
+  --sh-comment: #a19595;
   --sh-jsxliterals: #6266d1;
-  --sh-property:    #e25a1c;
-  --sh-entity:      #e25a1c;
+  --sh-property: #e25a1c;
+  --sh-entity: #e25a1c;
 }
 
-/* ==========================================================================
-   Base
-   ========================================================================== */
-
-* {box-sizing: border-box;}
-
-html {
-  min-width: 360px;
-  font-size: 18px;
+* {
+  box-sizing: border-box;
 }
 
+/** typeface **/
 body {
   font-family: var(--font-serif), sans-serif;
 }
@@ -99,37 +56,13 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif), serif;
 }
 
-/* Remove Safari input shadow on mobile */
-input[type="text"],
-input[type="email"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+html {
+  min-width: 360px;
+  font-size: 18px;
 }
-
-pre::-webkit-scrollbar {
-  display: none;
-}
-
-pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-table {
-  display: block;
-  max-width: fit-content;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-/* ==========================================================================
-   Prose (blog / MDX content)
-   ========================================================================== */
-
 
 .prose {
-  color: var(--color-ink);
+  @apply text-[#123857] dark:text-[#F7F4EF];
 }
 
 .prose .anchor {
@@ -145,28 +78,25 @@ table {
   @apply visible;
 }
 
+.prose a {
+  @apply transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em] font-normal text-[#123857] dark:text-[#5BC8E8];
+}
+
+.prose a:hover {
+  @apply dark:decoration-neutral-400 decoration-neutral-600;
+}
+
+.prose .anchor:after {
+  @apply text-neutral-300 dark:text-neutral-700;
+  content: "#";
+}
+
 .prose *:hover > .anchor {
   @apply visible;
 }
 
-.prose .anchor:after {
-  content: "#"; 
-  color: var(--color-divider);
-}
-
-.prose a {
-  @apply transition-all underline-offset-2 decoration-[0.1em] font-normal;
-  color: var(--color-ink);
-  text-decoration-color: var(--color-divider);
-}
-
-.prose a:hover {
-  text-decoration-color: var(--color-muted);
-}
-
 .prose pre {
-  background: var(--color-code-bg);
-  @apply rounded-lg overflow-x-auto;
+  @apply bg-[#F7F7F7] dark:bg-[#181818] rounded-lg overflow-x-auto;
 }
 
 .prose code {
@@ -197,12 +127,21 @@ table {
 }
 
 :is(.prose, .prose *):is(h1, h2, h3, h4, h5, h6) {
-  color: var(--color-ink);
+  color: #123857;
+}
+
+.dark :is(.prose, .prose *):is(h1, h2, h3, h4, h5, h6) {
+  color: #5BC8E8;
 }
 
 .prose strong,
 .prose th {
-  color: var(--color-ink);
+  color: #123857;
+}
+
+.dark .prose strong,
+.dark .prose th {
+  color: #5BC8E8;
 }
 
 .prose strong {
@@ -220,39 +159,54 @@ table {
   content: none;
 }
 
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Remove Safari input shadow on mobile */
+input[type="text"],
+input[type="email"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+table {
+  display: block;
+  max-width: fit-content;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
 .prose .callout > p {
   margin: 0;
+}
+
+/** sections **/
+.role {
+  border-bottom: none;
+  color: var(--teal);
+  font-weight: 600;
 }
 
 .title {
   text-wrap: balance;
 }
 
-/* still need? */
-
-.dark :is(.prose, .prose *):is(h1, h2, h3, h4, h5, h6) {
-  color: #5BC8E8;
-}
-
-.dark .prose strong,
-.dark .prose th {
-  color: #5BC8E8;
-}
-
-/* ==========================================================================
-   Masthead / hero bar
-   ========================================================================== */
-
 .hero-bar {
   display: flex;
   align-items: center;
   gap: 24px;
   padding: 16px 20px;
-  background: var(--color-panel);
+  background: var(--panel);
   border: 2px solid var(--color-ink);
   border-bottom: none;
-  box-shadow: inset 0 1px 0 var(--shadow-inset),
-    6px 6px 0 var(--shadow-panel);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 6px 6px 0 rgba(18, 56, 87, 0.1);
 }
 
 .hero-text {
@@ -275,62 +229,116 @@ table {
   font-family: var(--font-serif), serif;
   font-style: italic;
   font-size: 0.95rem;
-  color: var(--color-teal);
+  color: var(--teal);
   margin: 0;
 }
 
-/* ==========================================================================
-   Navbar
-   ========================================================================== */
+.dark .hero-bar {
+  background: #0F2233;
+  border-color: #5BC8E8;
+  box-shadow: inset 0 1px 0 rgba(91, 200, 232, 0.15), 6px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dark .hero-title {
+  color: #F7F4EF;
+}
+
+.dark .hero-subtitle {
+  color: #5BC8E8;
+}
 
 .navbar {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 10px;
-  padding: 10px 16px;
-  background: linear-gradient(180deg, var(--nav-bg-top) 0%, var(--nav-bg-bot) 100%);
+  background: linear-gradient(180deg, 
+  #E6E2D8 0%, 
+  #CFC9BC 100%);
   border: 2px solid var(--color-ink);
+  border-radius: 0;
+  padding: 10px 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 6px 6px 0 rgba(18, 56, 87, 0.1);
   width: 100%;
-  box-shadow: inset 0 1px 0 var(--shadow-inset), 6px 6px 0 var(--shadow-panel);
 }
 
 .nav-button {
   display: inline-block;
-  font-family: var(--font-sans), sans-serif;
+  border: 2px outset #E0DACB;
+  padding: 9px 20px;
+  font-family: "Sans";
   font-weight: 700;
   font-size: 0.85rem;
   letter-spacing: 0.06em;
-  text-decoration: none;
   color: var(--color-ink);
-  padding: 9px 20px;
-  background: linear-gradient(180deg, var(--btn-bg-top) 0%, var(--btn-bg-bot) 100%);
-  border-top:    2px solid var(--bevel-hi);
-  border-left:   2px solid var(--bevel-hi);
-  border-right:  2px solid var(--bevel-lo);
-  border-bottom: 2px solid var(--bevel-lo);
-  box-shadow: 1px 1px 0 var(--shadow-panel);
-  transition: background 0.08s ease;
-  cursor: pointer;
+  text-decoration: none;
+  background: linear-gradient(180deg, #FFFEFB 0%, #E9E4D8 100%);
+  box-shadow: 1px 1px 0 rgba(18, 56, 87, 0.15);
+  transition: transform 0.06s ease, box-shadow 0.06s ease, background 0.1s ease;
 }
 
 .nav-button:active {
-  border-top:    2px solid var(--bevel-lo);
-  border-left:   2px solid var(--bevel-lo);
-  border-right:  2px solid var(--bevel-hi);
-  border-bottom: 2px solid var(--bevel-hi);
-  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.45);
+  border-style: inset;
+  background: linear-gradient(180deg, #0F2E47 0%, var(--navy) 100%);
+  color: var(--paper);
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
   transform: translate(1px, 1px);
 }
 
-/* ==========================================================================
-   Panels
-   ========================================================================== */
+.dark .navbar {
+  background: linear-gradient(180deg, #1B3A5C 0%, #0D1B2A 100%);
+  border-color: #5BC8E8;
+  box-shadow: inset 0 1px 0 rgba(91, 200, 232, 0.15), 6px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dark .nav-button {
+  background: linear-gradient(180deg, #1F4A6E 0%, #123857 100%);
+  border-color: #3A5A7A;
+  color: #5BC8E8;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dark .nav-button:active {
+  background: linear-gradient(180deg, #0A1F33 0%, #0D1B2A 100%);
+  border-style: inset;
+  color: #F7F4EF;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.main {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0 20px;
+}
+
+.profile-body {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.profile-photo {
+  flex-shrink: 0;
+  object-fit: cover;
+  border: 2px solid var(--panel);
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px var(--shadow-light), 3px 3px 0 rgba(18, 56, 87, 0.1);
+}
+
+.dark .profile-photo {
+  border-color: #5BC8E8;
+  box-shadow: inset 0 0 0 1px rgba(91, 200, 232, 0.1), 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.profile-text {
+  flex: 1;
+  min-width: 0;
+}
 
 .panel {
-  background: var(--color-panel);
+  background: var(--panel);
   border: 2px solid var(--color-ink);
-  box-shadow: inset 0 0 0 1px var(--shadow-inset), 6px 6px 0 var(--shadow-panel);
+  border-radius: 0;
+  box-shadow: inset 0 0 0 1px var(--shadow-light), 6px 6px 0 rgba(18, 56, 87, 0.1);
   overflow: hidden;
   margin-bottom: 28px;
 }
@@ -340,7 +348,7 @@ table {
 }
 
 .panel-header {
-  background: linear-gradient(180deg, var(--color-teal-hi) 0%, var(--color-teal) 100%);
+  background: linear-gradient(180deg, var(--teal-light) 0%, var(--teal) 100%);
   color: #fff;
   font-weight: bold;
   font-size: 1rem;
@@ -351,30 +359,32 @@ table {
   border-bottom: 2px solid var(--color-ink);
 }
 
-.panel-header h1,
-.panel-header h2,
-.panel-header h3 {
-  color: #ffffff;
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  margin: 0;
-  font-family: var(--font-sans), sans-serif;
+.dark .panel {
+  background: #0F2233;
+  border-color: #5BC8E8;
+  box-shadow: inset 0 0 0 1px rgba(91, 200, 232, 0.1), 6px 6px 0 rgba(0, 0, 0, 0.3);
 }
 
-.panel-divider {
-  border: none;
-  border-top: 1px solid var(--color-divider);
-  margin: 8px 0;
+.dark .panel-header {
+  background: linear-gradient(180deg, #1B3A5C 0%, #123857 100%);
+  border-bottom-color: #5BC8E8;
 }
 
-/* ==========================================================================
-   Homepage layout
-   ========================================================================== */
-
-.main {
+.pill-row {
   display: flex;
-  flex-flow: row wrap;
-  gap: 0 20px;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pill {
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: linear-gradient(180deg, #FFFEFB 0%, #ECF4F4 100%);
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  border-radius: 1px;
+  padding: 4px 11px;
+  box-shadow: 1px 1px 0 rgba(31, 111, 120, 0.15);
 }
 
 .profile, .tools, .contact {
@@ -398,64 +408,12 @@ table {
   justify-content: space-around;
 }
 
-/* ==========================================================================
-   Profile section
-   ========================================================================== */
-
-.profile-body {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
+.panel-divider {
+  border: none;
+  border-top: 1px solid #C0B9A8;
 }
 
-.profile-photo {
-  flex-shrink: 0;
-  object-fit: cover;
-  border: 2px solid var(--color-panel);
-  border-radius: 5px;
-  box-shadow: inset 0 0 0 1px var(--shadow-inset), 3px 3px 0 var(--shadow-panel);
+.dark .panel-divider {
+  border-top-color: #2A4A6A;
 }
 
-.profile-text {
-  flex: 1;
-  min-width: 0;
-}
-
-.role {
-  color: var(--color-teal);
-  font-weight: 600;
-}
-
-.bio > :first-child {
-  margin-top: 0.25em;
-}
-
-/* ==========================================================================
-   Skills pills
-   ========================================================================== */
-
-.pill-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-
-.pill {
-  font-size: 0.8rem;
-  font-weight: 600;
-  background: linear-gradient(180deg, var(--color-panel) 0%, #ECF4F4 100%);
-  border-top:    1px solid var(--bevel-hi);
-  border-left:   1px solid var(--bevel-hi);
-  border-right:  1px solid var(--color-teal);
-  border-bottom: 1px solid var(--color-teal);
-  color: var(--color-teal);
-  padding: 4px 11px;
-  box-shadow: 1px 1px 0 rgba(31, 111, 120, 0.12);
-}
-
-.dark .pill {
-  background: linear-gradient(180deg, #1B3A5C 0%, #15293D 100%);
-  color: var(--color-ink);
-  border-right-color:  var(--color-teal);
-  border-bottom-color: var(--color-teal);
-}
