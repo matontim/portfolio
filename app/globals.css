@@ -9,38 +9,75 @@
   color: #fefefe;
 }
 
-/* Light theme colors */
+/* ==========================================================================
+   Design tokens
+   ========================================================================== */
+
 :root {
-  --sh-class: #2d5e9d;
-  --sh-identifier: #354150;
-  --sh-sign: #8996a3;
-  --sh-string: #007f7a;
-  --sh-keyword: #e02518;
-  --sh-comment: #a19595;
+  /* Brand palette */
+  --color-ink:      #123857;   /* primary text, borders, headings */
+  --color-bg:       #F7F4EF;   /* page background                 */
+  --color-panel:    #FFFEFB;   /* card / panel surface            */
+  --color-teal:     #1F6F78;   /* accent, role text, pills        */
+  --color-teal-hi:  #2C8C96;   /* panel header gradient top       */
+  --color-muted:    #6B6459;   /* dates, metadata, secondary text */
+  --color-divider:  #C0B9A8;   /* hr / panel-divider              */
+  --color-code-bg:  #F7F7F7;   /* inline + block code background  */
+
+  /* Bevel / shadow */
+  --bevel-hi:       #FFFFFF;
+  --bevel-lo:       #404040;
+  --shadow-panel:   rgba(18, 56, 87, 0.12);
+  --shadow-inset:   rgba(255, 255, 255, 0.7);
+
+  /* Nav chrome */
+  --nav-bg-top:     #E6E2D8;
+  --nav-bg-bot:     #CFC9BC;
+  --btn-bg-top:     #FFFEFB;
+  --btn-bg-bot:     #E9E4D8;
+  --btn-border:     #E0DACB;
+
+  /* Syntax highlighting (consumed by sugar-high at runtime) */
+  --sh-class:       #2d5e9d;
+  --sh-identifier:  #354150;
+  --sh-sign:        #8996a3;
+  --sh-string:      #007f7a;
+  --sh-keyword:     #e02518;
+  --sh-comment:     #a19595;
   --sh-jsxliterals: #6266d1;
-  --sh-property: #e25a1c;
-  --sh-entity: #e25a1c;
-  --color-ink: #123857;
-  background-color: #F7F4EF;
-  --panel: #FFFEFB;
-  --shadow-light: rgba(255, 255, 255, 0.7);
-  --shadow-dark: rgba(18, 56, 87, 0.25);
-  --teal-light: #2C8C96;
-  --teal: #1F6F78;
+  --sh-property:    #e25a1c;
+  --sh-entity:      #e25a1c;
 }
 
-/* Dark theme colors */
 .dark {
-  background-color: #0D1B2A;
-  --sh-class: #4c97f8;
-  --sh-identifier: white;
-  --sh-sign: #8996a3;
-  --sh-string: #0fa295;
-  --sh-keyword: #f47067;
-  --sh-comment: #a19595;
+  --color-ink:      #5BC8E8;
+  --color-bg:       #0D1B2A;
+  --color-panel:    #0F2233;
+  --color-teal:     #2C8C96;
+  --color-teal-hi:  #1B3A5C;
+  --color-muted:    #6E8499;
+  --color-divider:  #2A4A6A;
+  --color-code-bg:  #181818;
+
+  --bevel-hi:       #3A5A7A;
+  --bevel-lo:       #000000;
+  --shadow-panel:   rgba(0, 0, 0, 0.35);
+  --shadow-inset:   rgba(91, 200, 232, 0.1);
+
+  --nav-bg-top:     #1B3A5C;
+  --nav-bg-bot:     #0D1B2A;
+  --btn-bg-top:     #1F4A6E;
+  --btn-bg-bot:     #123857;
+  --btn-border:     #3A5A7A;
+
+  --sh-class:       #4c97f8;
+  --sh-identifier:  white;
+  --sh-string:      #0fa295;
+  --sh-keyword:     #f47067;
+  --sh-comment:     #a19595;
   --sh-jsxliterals: #6266d1;
-  --sh-property: #e25a1c;
-  --sh-entity: #e25a1c;
+  --sh-property:    #e25a1c;
+  --sh-entity:      #e25a1c;
 }
 
 * {
