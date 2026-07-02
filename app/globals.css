@@ -166,7 +166,7 @@ table {
 
 .prose pre {
   background: var(--color-code-bg);
-  @apply rounded-1g overflow-x-auto;
+  @apply rounded-lg overflow-x-auto;
 }
 
 .prose code {
@@ -275,7 +275,7 @@ table {
   font-family: var(--font-serif), serif;
   font-style: italic;
   font-size: 0.95rem;
-  color: var(--teal);
+  color: var(--color-teal);
   margin: 0;
 }
 
@@ -321,45 +321,6 @@ table {
   border-bottom: 2px solid var(--bevel-hi);
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.45);
   transform: translate(1px, 1px);
-}
-
-/* ==========================================================================
-   Masthead / hero bar
-   ========================================================================== */
-
-.hero-bar {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 16px 20px;
-  background: var(--color-panel);
-  border: 2px solid var(--color-ink);
-  border-bottom: none;
-  box-shadow: inset 0 1px 0 var(--shadow-inset), 6px 6px 0 var(--shadow-panel);
-}
-
-.hero-text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.hero-title {
-  font-family: var(--font-serif), serif;
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--color-ink);
-  margin: 0;
-  line-height: 1;
-}
-
-.hero-subtitle {
-  font-family: var(--font-serif), serif;
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--color-teal);
-  margin: 0;
 }
 
 /* ==========================================================================
