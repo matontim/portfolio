@@ -1,5 +1,3 @@
-
-Project slug page · TSX
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "app/components/mdx";
