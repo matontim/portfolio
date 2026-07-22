@@ -33,7 +33,12 @@ export function Navbar() {
           <Link
             key={path}
             href={path}
-            className="nav-button"
+            className={`nav-button${
+              pathname === path ||
+              (path !== "/" && path !== "/#contact" && pathname.startsWith(path))
+                ? " active"
+                : ""
+            }`}
           >
             {name}
           </Link>
