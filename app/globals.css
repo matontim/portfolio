@@ -16,8 +16,8 @@
 :root {
   background-color: #F7F4EF;
   --color-ink: #123857;
-  --color-muted: #6B6459
-  --panel: #FFFEFB;
+  --color-muted: #6B6459;
+  --panel: #FFFEFB; 
   --shadow-light: rgba(255, 255, 255, 0.7);
   --shadow-dark: rgba(18, 56, 87, 0.25);
   --teal-light: #2C8C96;
