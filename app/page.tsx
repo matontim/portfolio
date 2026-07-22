@@ -26,7 +26,7 @@ export default function Page() {
       <p className="role text-sm mb-2">M.S. Bioinformatics Student at Boston University</p>
       <hr className="panel-divider" />
       <div className="prose max-w-none bio">
-        <p>I am a Bioinformatics Master's student with experience in RNA-seq analysis, genomic data processing, statistical modeling, and scientific programming. Through independent projects and research experiences, I have developed computational workflows for biological data analysis and reproducible research.</p>
+        <p>Hi, I'm Madeline, but you can call me Del. I am a Bioinformatics Master's student with experience in RNA-seq analysis, genomic data processing, statistical modeling, and scientific programming. Through independent projects and research experiences, I have developed computational workflows for biological data analysis and reproducible research.</p>
         <p>I am particularly interested in combining bioinformatics with full-stack web development to create user-friendly tools for data visualization, analysis, and scientific collaboration. My long-term interests include multi-omics data integration, machine learning, drug discovery, and building software that lowers barriers to computational research.</p>
       </div>
       </div>
