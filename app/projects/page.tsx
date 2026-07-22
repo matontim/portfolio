@@ -1,32 +1,41 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { projects } from "./project-data";
-
+ 
 export const metadata: Metadata = {
   title: "Projects",
   description: "Projects",
 };
-
+ 
 export default function Projects() {
   return (
-    <section>
-      <h1 className="prose mb-8 text-2xl font-medium">Projects</h1>
-      <div>
-        {projects.map((project, index) => (
-          <Link
-            key={index}
-            href={`/projects/${project.slug}`}
-            className="flex flex-col space-y-1 mb-5 transition-opacity duration-200 hover:opacity-80"
-          >
-            <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
-              <h2 className="prose">{project.title}</h2>
-              <p className="text-neutral-600 dark:text-neutral-400">
-                {project.description}
-              </p>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </section>
+    <main className="main">
+      <section className="panel" style={{ width: "100%" }}>
+        <div className="panel-header">
+          <h2>PROJECTS</h2>
+        </div>
+        <ul className="space-y-0">
+          {projects.map((project, index) => (
+            <li key={index}>
+              <Link
+                href={`/projects/${project.slug}`}
+                className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6 py-3 px-1 hover:bg-[#F0EDE6] dark:hover:bg-[#1B3A5C] transition-colors duration-100"
+              >
+                <span
+                  className="font-bold text-sm flex-shrink-0 sm:w-48"
+                  style={{ color: "var(--color-ink)" }}
+                >
+                  {project.title}
+                </span>
+                <span className="text-xs" style={{ color: "var(--color-muted)" }}>
+                  {project.description}
+                </span>
+              </Link>
+              <hr className="panel-divider" />
+            </li>
+          ))}
+        </ul>
+      </section>
+    </main>
   );
 }

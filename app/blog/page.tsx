@@ -17,8 +17,8 @@ export default function BlogPosts() {
         </div>
         <div>
           <p className="role text-sm mb-4">
-            Writing on the broader impacts and societal relevance of science and
-            technology — drug discovery, emerging technologies, and public
+            This is my personal blog where I write on the broader impacts and societal relevance of science and
+            technology. Topics include drug discovery, emerging technologies, and public
             understanding of science.
           </p>
           <hr className="panel-divider" />
