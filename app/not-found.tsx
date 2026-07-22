@@ -48,7 +48,7 @@ export default function NotFound() {
             }}
           >
             The article you're looking for may have been moved, renamed, or
-            never existed in this edition of the encyclopedia.
+            never existed.
           </p>
           <hr className="panel-divider" style={{ marginBottom: "24px" }} />
           <Link href="/" className="nav-button">
