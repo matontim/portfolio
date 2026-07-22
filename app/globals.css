@@ -65,7 +65,7 @@ html {
 }
 
 body {
-  font-family: Serif;
+  font-family: var(--font-serif), serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -241,21 +241,24 @@ table {
 }
 
 .hero-title {
-  font-family: 'Cinzel', var(--font-serif), serif;
-  font-size: 2rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.9rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--color-ink);
   margin: 0;
-  line-height: 1;
+  line-height: 1.15;
 }
 
 .hero-subtitle {
-  font-family: var(--font-serif), serif;
+  font-family: 'Lora', serif;
   font-style: italic;
   font-size: 0.95rem;
   color: var(--teal);
   margin: 0;
+  padding-top: 6px;
+  border-top: 1px solid #C8932B;  /* gold rule matching your logo */
+  display: inline-block;
 }
 
 .dark .hero-bar {
