@@ -15,17 +15,30 @@
 :root {
   background-color: #F7F4EF;
   --color-ink: #123857;
+  --color-muted: #6B6459
   --panel: #FFFEFB;
   --shadow-light: rgba(255, 255, 255, 0.7);
   --shadow-dark: rgba(18, 56, 87, 0.25);
   --teal-light: #2C8C96;
   --teal: #1F6F78;
   --navy: #123857;
+  /* sugar high syntax color */
+  --sh-class: #2d5e9d;
+  --sh-identifier: #354150;
+  --sh-sign: #8996a3;
+  --sh-string: #007f7a;
+  --sh-keyword: #e02518;
+  --sh-comment: #a19595;
+  --sh-jsxliterals: #6266d1;
+  --sh-property: #e25a1c;
+  --sh-entity: #e25a1c;
 }
 
 /* Dark theme colors */
 .dark {
   background-color: #0D1B2A;
+  --color-ink: #5BC8E8;
+  --color-muted: #6E8499;
   --sh-class: #4c97f8;
   --sh-identifier: white;
   --sh-sign: #8996a3;
