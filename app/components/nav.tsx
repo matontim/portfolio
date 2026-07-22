@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { ThemeSwitch } from "./theme-switch";
 import { metaData } from "../lib/config";
+import { usePathname } from "next/navigation";
 
 const navItems = {
   "/": { name: "Home" },
@@ -10,6 +13,8 @@ const navItems = {
 };
 
 export function Navbar() {
+  const pathname = usePathname();
+
   return (
     <header className="mb-8">
       <div className="hero-bar">
