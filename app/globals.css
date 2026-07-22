@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Georgia&family=Trebuchet+MS&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Georgia&display=swap');
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -240,7 +241,7 @@ table {
 }
 
 .hero-title {
-  font-family: var(--font-serif), serif;
+  font-family: 'Cinzel', var(--font-serif), serif;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.08em;

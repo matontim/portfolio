@@ -16,6 +16,13 @@ export function Navbar() {
         <Link href="/">
           <img src="/del-icon.svg" alt={metaData.name} className="h-30 w-auto" />
         </Link>
+        <div style={{
+          width: "2px",
+          alignSelf: "stretch",
+          background: "#C0B9A8",
+          margin: "4px 0"
+        }}>
+        </div>
         <div className="hero-text">
           <h1 className="hero-title">MADELINE MATONTI</h1>
           <p className="hero-subtitle">Curiosity Drives Progress</p>
