@@ -1,8 +1,8 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Georgia&family=Trebuchet+MS&display=swap');
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where(.dark, .dark *));
-@import url('https://fonts.googleapis.com/css2?family=Georgia&family=Trebuchet+MS&display=swap');
 
 ::selection {
   background-color: #47a3f3;
@@ -97,7 +97,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .prose pre {
-  @apply bg-[#F7F7F7] dark:bg-[#181818] rounded-lg overflow-x-auto;
+  background-color: #E8E4DC;
+  border: 1px solid #C0B9A8;
+  @apply rounded-lg overflow-x-auto;
 }
 
 .prose code {
