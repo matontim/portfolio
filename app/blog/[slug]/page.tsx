@@ -3,15 +3,12 @@ import { notFound } from "next/navigation";
 import { CustomMDX } from "app/components/mdx";
 import { formatDate, getBlogPosts } from "app/lib/posts";
 import { metaData } from "app/lib/config";
-
+ 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  return posts.map((post) => ({ slug: post.slug }));
 }
-
+ 
 export async function generateMetadata({
   params,
 }: {
@@ -19,22 +16,19 @@ export async function generateMetadata({
 }): Promise<Metadata | undefined> {
   const { slug } = await params;
   let post = getBlogPosts().find((post) => post.slug === slug);
-
-  if (!post) {
-    return;
-  }
-
+  if (!post) return;
+ 
   let {
     title,
     publishedAt: publishedTime,
     summary: description,
     image,
   } = post.metadata;
-
+ 
   let ogImage = image
     ? image
     : `${metaData.baseUrl}/og?title=${encodeURIComponent(title)}`;
-
+ 
   return {
     title,
     description,
@@ -44,15 +38,11 @@ export async function generateMetadata({
       type: "article",
       publishedTime,
       url: `${metaData.baseUrl}/blog/${post.slug}`,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
+      images: [{ url: ogImage }],
     },
   };
 }
-
+ 
 export default async function Blog({
   params,
 }: {
@@ -60,13 +50,10 @@ export default async function Blog({
 }) {
   const { slug } = await params;
   let post = getBlogPosts().find((post) => post.slug === slug);
-
-  if (!post) {
-    notFound();
-  }
-
+  if (!post) notFound();
+ 
   return (
-    <section>
+    <main className="main">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -82,27 +69,38 @@ export default async function Blog({
               ? `${metaData.baseUrl}${post.metadata.image}`
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
             url: `${metaData.baseUrl}/blog/${post.slug}`,
-            author: {
-              "@type": "Person",
-              name: metaData.name,
-            },
+            author: { "@type": "Person", name: metaData.name },
           }),
         }}
       />
-
-      <h1 className="prose title mb-3 font-medium text-2xl">
-        {post.metadata.title}
-      </h1>
-
-      <div className="flex justify-between items-center mt-2 mb-8 text-medium">
-        <p className="text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.metadata.publishedAt)}
-        </p>
-      </div>
-
-      <article className="prose prose-quoteless prose-neutral dark:prose-invert max-w-none">
-        <CustomMDX source={post.content} />
-      </article>
-    </section>
+ 
+      <section className="panel" style={{ width: "100%" }}>
+        {/* Panel header — post title */}
+        <div className="panel-header">
+          <h2 className="title normal-case tracking-normal text-base font-bold">
+            {post.metadata.title}
+          </h2>
+        </div>
+ 
+        {/* Dateline */}
+        <div
+          className="flex items-center gap-2 px-5 py-2 text-xs font-semibold uppercase tracking-widest border-b-2"
+          style={{
+            color: "var(--color-muted)",
+            borderColor: "var(--color-divider)",
+          }}
+        >
+          <span>Published</span>
+          <span style={{ color: "var(--color-teal)" }}>
+            {formatDate(post.metadata.publishedAt)}
+          </span>
+        </div>
+ 
+        {/* Body */}
+        <article className="prose prose-quoteless prose-neutral dark:prose-invert max-w-none">
+          <CustomMDX source={post.content} />
+        </article>
+      </section>
+    </main>
   );
 }
