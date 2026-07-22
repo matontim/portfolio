@@ -1,51 +1,57 @@
 import Link from "next/link";
 import { formatDate, getBlogPosts } from "app/lib/posts";
-
+ 
 export const metadata = {
   title: "Blog",
   description: "Writing about the broader impacts of science and technology",
 };
-
+ 
 export default function BlogPosts() {
   let allBlogs = getBlogPosts();
-
+ 
   return (
-    <section>
-      <h1 className="prose mb-8 text-2xl font-medium">Blog for Scientific and Research Insight</h1>
-      <div className="prose prose-neutral mb-10 max-w-none">
-        <p>
-          Here I write about the broader impacts and societal relevence of science and technology. Topics include recent breakthroughs in drug discovery, the societal implications of emerging technologies,
-          and public understanding of science.
-        </p>
-      </div>
-      <div>
-        {allBlogs
-          .sort((a, b) => {
-            if (
-              new Date(a.metadata.publishedAt) >
-              new Date(b.metadata.publishedAt)
-            ) {
-              return -1;
-            }
-            return 1;
-          })
-          .map((post) => (
-            <Link
-              key={post.slug}
-              className="flex flex-col space-y-1 mb-5 transition-opacity duration-200 hover:opacity-80"
-              href={`/blog/${post.slug}`}
-            >
-              <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
-                <h2 className="prose">
-                  {post.metadata.title}
-                </h2>
-                <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm">
-                  {formatDate(post.metadata.publishedAt, false)}
-                </p>
-              </div>
-            </Link>
-          ))}
-      </div>
-    </section>
+    <main className="main">
+      <section className="panel" style={{ width: "100%" }}>
+        <div className="panel-header">
+          <h2>BLOG</h2>
+        </div>
+        <div>
+          <p className="role text-sm mb-4">
+            Writing on the broader impacts and societal relevance of science and
+            technology — drug discovery, emerging technologies, and public
+            understanding of science.
+          </p>
+          <hr className="panel-divider" />
+          <ul className="mt-4 space-y-0">
+            {allBlogs
+              .sort((a, b) =>
+                new Date(a.metadata.publishedAt) >
+                new Date(b.metadata.publishedAt)
+                  ? -1
+                  : 1
+              )
+              .map((post) => (
+                <li key={post.slug}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="flex flex-row justify-between items-baseline gap-4 py-3 px-1 hover:bg-[#F0EDE6] dark:hover:bg-[#1B3A5C] transition-colors duration-100"
+                  >
+                    <span className="font-bold text-sm" style={{ color: "var(--color-ink)" }}>
+                      {post.metadata.title}
+                    </span>
+                    <span
+                      className="text-xs tabular-nums flex-shrink-0"
+                      style={{ color: "var(--color-muted)" }}
+                    >
+                      {formatDate(post.metadata.publishedAt, false)}
+                    </span>
+                  </Link>
+                  <hr className="panel-divider" />
+                </li>
+              ))}
+          </ul>
+        </div>
+      </section>
+    </main>
   );
 }
