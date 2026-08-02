@@ -14,10 +14,10 @@ export const projects: Project[] = [
     slug: "secure-genomics-pipeline",
   },
   {
-    title: "Study Planner Web Application",
+    title: "StudyDesk",
     year: 2026,
     description:
       "Full-stack productivity application currently in deployment, focused on API integration, frontend-backend communication, and user-centered design.",
-    slug: "study-planner-web-app",
+    slug: "study-desk",
   },
 ];
